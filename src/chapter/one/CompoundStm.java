@@ -21,4 +21,9 @@ public class CompoundStm extends Stm{
     public int getPrintStmMaxArgs() {
         return Integer.max(stm1.getPrintStmMaxArgs(), stm2.getPrintStmMaxArgs());
     }//end of method
+
+    @Override
+    public Table interprete(Table t) {
+        return stm2.interprete(stm1.interprete(t));
+    }
 }//end of class

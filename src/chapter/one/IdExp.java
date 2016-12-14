@@ -20,4 +20,9 @@ public class IdExp extends Exp{
     public int getPrintStmMaxArgs() {
         return 0;
     }
+
+    @Override
+    public IntAndTable interPrete(Table table) {
+        return new IntAndTable(table.lookup(id), table);
+    }
 }//end of class

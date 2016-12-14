@@ -20,4 +20,9 @@ public class PrintStm extends Stm{
     public int getPrintStmMaxArgs() {
         return exps.countNumberOfArgs();
     }//end of method
+
+    @Override
+    public Table interprete(Table t) {
+        return exps.interPrete(t).t;
+    }
 }//end of class

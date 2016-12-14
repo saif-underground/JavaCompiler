@@ -13,12 +13,22 @@ package chapter.one;
 public class NumExp extends Exp{
     public int num;
 
+    /**
+     * constructor for the class
+     * @param num is the number that this expression holds
+     */
     public NumExp(int num) {
         this.num = num;
-    }//end of constructor
+    }
     
     @Override
     public int getPrintStmMaxArgs() {
         return 0;
     }
+
+    @Override
+    public IntAndTable interPrete(Table table) {
+        return new IntAndTable(num, table);
+    }
+    
 }//end of class

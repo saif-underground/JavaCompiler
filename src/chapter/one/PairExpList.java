@@ -23,5 +23,10 @@ public class PairExpList extends ExpList{
     public int countNumberOfArgs() {
         return 1 + tail.countNumberOfArgs();
     }//end of method
+
+    @Override
+    public IntAndTable interPrete(Table table) {
+        return tail.interPrete(head.interPrete(table).t);
+    }
     
 }//end of class

@@ -23,4 +23,9 @@ public class AssignStm extends Stm{
     public int getPrintStmMaxArgs() {
         return exp.getPrintStmMaxArgs();
     }
+
+    @Override
+    public Table interprete(Table t) {
+        return new Table(id, exp.interPrete(t).i, t);
+    }
 }//end of class

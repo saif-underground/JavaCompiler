@@ -22,5 +22,21 @@ class Table {
         value = v;
         tail = t;
     }
+    
+    /**
+     * returns the value of the identifier from the table
+     * @param id to look at
+     * @return value of the id
+     */
+    int lookup(String id){
+        Table head = this;
+        while(head != null){
+            if(head.id.equals(id)){
+                return head.value;
+            }
+            head = head.tail;
+        }
+        return Integer.MIN_VALUE;
+    }
 }
 

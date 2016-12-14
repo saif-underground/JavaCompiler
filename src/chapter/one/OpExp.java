@@ -25,4 +25,28 @@ public class OpExp extends Exp{
     public int getPrintStmMaxArgs() {
         return Integer.max(left.getPrintStmMaxArgs(), right.getPrintStmMaxArgs());
     }//end of method
+
+    @Override
+    public IntAndTable interPrete(Table table) {
+        IntAndTable leftExpResult = left.interPrete(table);
+        IntAndTable rightExpResult = right.interPrete(leftExpResult.t);
+        int valLeft = leftExpResult.i;
+        int valRight = rightExpResult.i;
+        int result = 0;
+        switch(oper){
+            case Plus:
+                result = valLeft + valRight;
+                break;
+            case Minus:
+                result = valLeft - valRight;
+                break;
+            case Times:
+                result = valLeft * valRight;
+                break;
+            case Div:
+                result = valLeft / valRight;
+                break;
+        }
+        return new IntAndTable(result, rightExpResult.t);
+    }
 }//end of class

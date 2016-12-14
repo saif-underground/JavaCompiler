@@ -12,4 +12,5 @@ package chapter.one;
  */
 public abstract class Exp {
     abstract public int getPrintStmMaxArgs();
+    abstract public IntAndTable interPrete(Table table);
 }//end of class

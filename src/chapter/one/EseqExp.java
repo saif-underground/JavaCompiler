@@ -23,4 +23,9 @@ public class EseqExp extends Exp{
     public int getPrintStmMaxArgs() {
         return Integer.max(stm.getPrintStmMaxArgs(), exp.getPrintStmMaxArgs());
     }//end of method
+
+    @Override
+    public IntAndTable interPrete(Table table) {
+        return exp.interPrete(stm.interprete(table));
+    }
 }//end of class

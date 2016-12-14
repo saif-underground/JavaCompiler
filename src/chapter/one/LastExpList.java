@@ -21,5 +21,10 @@ public class LastExpList extends ExpList{
     public int countNumberOfArgs() {
        return 1; 
     }//end of method
+
+    @Override
+    public IntAndTable interPrete(Table table) {
+        return head.interPrete(table);
+    }
     
 }//end of class

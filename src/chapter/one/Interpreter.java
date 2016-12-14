@@ -42,22 +42,3 @@ public class Interpreter {
     }
 }
 
-/**
- * return type of expression interpreter. an expression might update a table 
- * and return a value.
- * @author sid
- */
-class IntAndTable {
-    int i;
-    Table t;
-
-    /**
-     * 
-     * @param ii value that the expression evaluates to
-     * @param tt updated table because of the expression evaluation
-     */
-    IntAndTable(int ii, Table tt) {
-        i = ii;
-        t = tt;
-    }
-}

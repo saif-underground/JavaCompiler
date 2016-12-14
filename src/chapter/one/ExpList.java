@@ -12,4 +12,5 @@ package chapter.one;
  */
 public abstract class ExpList {
     abstract public int countNumberOfArgs();
+    abstract public IntAndTable interPrete(Table table);
 }//end of class
