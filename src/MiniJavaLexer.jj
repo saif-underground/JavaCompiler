@@ -8,34 +8,52 @@ PARSER_BEGIN(MiniJavaParser)
   public class MiniJavaParser {}
 PARSER_END(MiniJavaParser)
 
-
-// Insert a specification of a lexical analysis here. 
-TOKEN : {
-	< #DIGIT: ["0"-"9"] >
-	|< LETTER: ["A"-"Z"] | ["a"-"z"] >
-	| < IDENTIFIER: <LETTER> (<LETTER>|<DIGIT> | "_")* >
-	| < INTEGER_LITERAL: (<DIGIT>)+ >
-        | <OP : "+" | "-" | "*" | "/">
-}
-
 /* The regular expressions here will be skipped during lexical analysis: */
 SKIP : {
-	<"//" (<DIGIT> | <LETTER> )* ("\n" | "\r" | "\r\n")>
-	|<"/*" (<DIGIT> | <LETTER> )* "*/">
+	<"//" (<DIGIT> | <LETTER> | " ")* ("\n" | "\r" | "\r\n")>
+	|<"/*" (<DIGIT> | <LETTER> | (" " | "\n" | "\r" | "\r\n"))* "*/">
 	| " "
 	| "\t"
 	| "\n"
 }
 
+// Insert a specification of a lexical analysis here. 
+TOKEN : {
+        <CLASS: "class">
+        |<IF: "if">
+        |<INT: "int">
+        |<NEW: "new">
+        |<VOID: "void">
+        |<ELSE: "else">
+        |<TRUE: "true">
+        |<MAIN: "main">
+        |<THIS: "this">
+        |<WHILE: "while">
+        |<FALSE: "false">
+        |<PUBLIC: "public">
+        |<STATIC: "static">
+        |<STRING: "String">
+        |<LENGTH: "length">
+        |<RETURN: "return">
+        |<BOOLEAN: "boolean">
+        |<EXTENDS: "extends">
+        |< #DIGIT: ["0"-"9"] >
+	|< #LETTER: ["A"-"Z"] | ["a"-"z"] >
+	| < IDENTIFIER: <LETTER> (<LETTER>|<DIGIT> | "_")* >
+	| < INTEGER_LITERAL: (<DIGIT>)+ >
+}
+
+
+
 // The following is a simple grammar that will allow you
 // to test the generated lexer.
+/*
 void Goal() :
 {}
 {
   ( MiniJavaToken() )*
   <EOF>
 }
-
 
 void MiniJavaToken():
 {}
@@ -47,7 +65,7 @@ void MiniJavaToken():
   "length" | <INTEGER_LITERAL> | "true" | "false" | "this" | "new" |
   "!"
 }
-
+*/
 //adding parser
 void Program() :
 {}
@@ -60,8 +78,8 @@ void Program() :
 void MainClass() :
 {}
 {
-    "class" <IDENTIFIER> "{" "public" "static" "void" "main" "(" "String" "[" "]" <IDENTIFIER> ")"
-    "{" Statement() "}" "}"
+    <CLASS> <IDENTIFIER> "{" "public" "static" "void" "main" "(" "String" "[" "]" <IDENTIFIER> ")"
+    "{" (LOOKAHEAD(2) VarDecl())* (Statement())* "}" "}"
 }
 
 //rule for class other than main
@@ -123,7 +141,7 @@ void Exp():
 {}
 {
     LOOKAHEAD(2)
-    <INTEGER_LITERAL> <OP> Exp()
+    <INTEGER_LITERAL> "+" <INTEGER_LITERAL>
     | LOOKAHEAD(2) 
       <IDENTIFIER> "[" Exp() "]"
     | LOOKAHEAD(3)
@@ -153,7 +171,3 @@ void ExpRest():
 {
     "," Exp()
 }
-
-
-
-
